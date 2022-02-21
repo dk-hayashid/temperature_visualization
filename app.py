@@ -78,8 +78,9 @@ app.layout = html.Div(children=[
 )
 def update_graph(type_, date_, period_):
     df = pd.read_csv(f'./data/{date_}_{period_}/{type_}.csv')
-    df_max = max(df.max().tolist()[1:])
-    df_min = min(df.max().tolist()[1:])
+    # df_max = max(df.max().tolist()[1:])
+    # df_min = min(df.max().tolist()[1:])
+    df_min, df_max = 22, 25
     dfs = []
     for idx, now in df.iterrows():
         dfs.append(pd.DataFrame(index=range(1, 12)[
@@ -115,4 +116,4 @@ def update_graph(type_, date_, period_):
     return dcc.Graph(figure=fig)
 
 
-app.run_server(host="0.0.0.0", port=8050, debug=False)  # Turn off reloader if inside Jupyter
+app.run_server(host="0.0.0.0", port=5000, debug=False)  # Turn off reloader if inside Jupyter
