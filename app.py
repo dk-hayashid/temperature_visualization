@@ -91,7 +91,7 @@ def update_graph(type_, date_, period_):
         dfs.append(pd.DataFrame(index=range(1, 12)[
                    ::-1], columns=list("abcde"), data=now.values[1:].reshape(11, 5)))
     frames = [
-        go.Frame(data=go.Heatmap(z=df.values, x=df.columns, y=df.index[::-1],colorscale = cm), name=i)
+        go.Frame(data=go.Heatmap(z=df.values, x=df.columns, y=df.index,colorscale = cm), name=i)
         for i, df in zip(list(df['time']), dfs)
     ]
 
