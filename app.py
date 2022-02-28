@@ -2,14 +2,13 @@ import dash
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
-import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 
 cm = [
-    [0, "rgb(181, 210, 236)"],
-    [0.5, "rgb(255, 255, 255)"],
-    [1.0, "rgb(252, 91, 74)"]
+        [0, "rgb(181, 210, 236)"],
+        [0.5, "rgb(255, 255, 255)"],
+        [1.0, "rgb(252, 91, 74)"]
 ]
 df = pd.read_csv('./data/0127_AM/temperature.csv')
 app = dash.Dash(__name__)
@@ -75,11 +74,12 @@ app.layout = html.Div(children=[
 
 
 @app.callback(
-    dash.dependencies.Output("heatmap", "children"),
-    [dash.dependencies.Input("select-data-type", "value"),
-     dash.dependencies.Input("select-data-date", "value"),
-     dash.dependencies.Input("select-data-period", "value"),
-     ]
+    Output("heatmap", "children"),
+    [
+        Input("select-data-type", "value"),
+        Input("select-data-date", "value"),
+        Input("select-data-period", "value"),
+    ]
 )
 def update_graph(type_, date_, period_):
     df = pd.read_csv(f'./data/{date_}_{period_}/{type_}.csv')
