@@ -6,6 +6,11 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 
+cm = [
+    [0, "rgb(181, 210, 236)"],
+    [0.5, "rgb(255, 255, 255)"],
+    [1.0, "rgb(252, 91, 74)"]
+]
 df = pd.read_csv('./data/0127_AM/temperature.csv')
 app = dash.Dash(__name__)
 app.layout = html.Div(children=[
@@ -86,7 +91,7 @@ def update_graph(type_, date_, period_):
         dfs.append(pd.DataFrame(index=range(1, 12)[
                    ::-1], columns=list("abcde"), data=now.values[1:].reshape(11, 5)))
     frames = [
-        go.Frame(data=go.Heatmap(z=df.values, x=df.columns, y=df.index), name=i)
+        go.Frame(data=go.Heatmap(z=df.values, x=df.columns, y=df.index[::-1],colorscale = cm), name=i)
         for i, df in zip(list(df['time']), dfs)
     ]
 
